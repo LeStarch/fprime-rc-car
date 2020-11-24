@@ -29,6 +29,7 @@ include("${FPRIME_FRAMEWORK_PATH}/cmake/FPrime-Code.cmake")
 ##
 # Add component subdirectories
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Control/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Gps/")
 
 # Add Topology subdirectory
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Top/")

@@ -6,6 +6,10 @@
 #include <Os/File.hpp>
 #include <Fw/Types/MallocAllocator.hpp>
 #include <Rover/Top/RateSchedContexts.hpp>
+#include <Fw/Buffer/Buffer.hpp>
+
+U8 serial_data[GPS_SERIAL_SIZE];
+Fw::Buffer serial_buffer(serial_data, sizeof(serial_data));
 
 enum {
     DOWNLINK_PACKET_SIZE = 500,
@@ -58,9 +62,7 @@ Svc::PrmDbImpl prmDb("PRM","PrmDb.dat");
 
 Svc::FileUplink fileUplink("fileUplink");
 
-Svc::FileDownlink fileDownlink ("fileDownlink", DOWNLINK_PACKET_SIZE);
-
-Svc::BufferManager fileDownlinkBufferManager("fileDownlinkBufferManager", DOWNLINK_BUFFER_STORE_SIZE, DOWNLINK_BUFFER_QUEUE_SIZE);
+Svc::FileDownlink fileDownlink ("fileDownlink", 1000, 1000);
 
 Svc::BufferManager fileUplinkBufferManager("fileUplinkBufferManager", UPLINK_BUFFER_STORE_SIZE, UPLINK_BUFFER_QUEUE_SIZE);
 
@@ -77,7 +79,10 @@ Drv::LinuxGpioDriverComponentImpl right("right");
 Drv::LinuxGpioDriverComponentImpl forward("forward");
 Drv::LinuxGpioDriverComponentImpl backward("backward");
 
+Drv::LinuxSerialDriverComponentImpl serial("serial");
+
 Rover::ControlComponentImpl control("control");
+Rover::GpsComponentImpl gps("gps");
 
 void constructApp(U32 port_number, char* hostname) {
 
@@ -113,7 +118,6 @@ void constructApp(U32 port_number, char* hostname) {
     fileUplink.init(30, 0);
     fileDownlink.init(30, 0);
     fileUplinkBufferManager.init(0);
-    fileDownlinkBufferManager.init(1);
 
     fatalAdapter.init(0);
     fatalHandler.init(0);
@@ -126,8 +130,12 @@ void constructApp(U32 port_number, char* hostname) {
     backward.init(0);
 
     control.init(10,0);
+    gps.init(0);
+    serial.init(0);
 
     constructRoverArchitecture();
+    // Send in a buffer for the serial driver to use, it feeds a passive so it only needs one
+    serial.get_readBufferSend_InputPort(0)->invoke(serial_buffer);
 
     /* Register commands */
     cmdSeq.regCommands();
@@ -137,6 +145,7 @@ void constructApp(U32 port_number, char* hostname) {
     fileDownlink.regCommands();
     health.regCommands();
     control.regCommands();
+    gps.regCommands();
 
     // set sequencer timeout
     cmdSeq.setTimeout(30);
@@ -179,6 +188,14 @@ void constructApp(U32 port_number, char* hostname) {
     fileDownlink.start(0, 100, 10*1024);
     fileUplink.start(0, 100, 10*1024);
     control.start(0, 100, 10*1024);
+    
+    if (not serial.open("/dev/ttyACM0",
+            Drv::LinuxSerialDriverComponentImpl::BAUD_9600,
+            Drv::LinuxSerialDriverComponentImpl::NO_FLOW,
+            Drv::LinuxSerialDriverComponentImpl::PARITY_NONE,
+            true)) {
+        return;
+    }
 
     if (not headlight.open(26,Drv::LinuxGpioDriverComponentImpl::GPIO_OUT)) {
         return;
@@ -200,6 +217,7 @@ void constructApp(U32 port_number, char* hostname) {
         return;
     }
 
+    serial.startReadThread(100,10*1024,-1);
     // Initialize socket server
     if (hostname != NULL && port_number != 0) {
         socketIpDriver.startSocketTask(100, 10 * 1024, hostname, port_number);
@@ -207,6 +225,7 @@ void constructApp(U32 port_number, char* hostname) {
 }
 
 void exitTasks(void) {
+    serial.quitReadThread();
     linuxTimer.quit();
     rateGroup1HzComp.exit();
     rateGroup10HzComp.exit();

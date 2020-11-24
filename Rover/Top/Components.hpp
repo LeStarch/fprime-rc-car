@@ -32,6 +32,7 @@
 
 // Main app
 #include <Rover/Control/ControlComponentImpl.hpp>
+#include <Rover/Gps/GpsComponentImpl.hpp>
 
 void constructRoverArchitecture(void);
 void exitTasks(void);
@@ -50,13 +51,11 @@ extern Svc::CommandDispatcherImpl cmdDisp;
 extern Svc::PrmDbImpl prmDb;
 extern Svc::FileUplink fileUplink;
 extern Svc::FileDownlink fileDownlink;
-extern Svc::BufferManager fileDownlinkBufferManager;
 extern Svc::BufferManager fileUplinkBufferManager;
 extern Svc::AssertFatalAdapterComponentImpl fatalAdapter;
 extern Svc::FatalHandlerComponentImpl fatalHandler;
 extern Svc::HealthImpl health;
 
-extern Drv::LinuxSerialDriverComponentImpl uartDrv;
 extern Drv::LinuxSpiDriverComponentImpl spiDrv;
 extern Drv::LinuxGpioDriverComponentImpl headlight;
 extern Drv::LinuxGpioDriverComponentImpl left;
@@ -64,9 +63,11 @@ extern Drv::LinuxGpioDriverComponentImpl right;
 extern Drv::LinuxGpioDriverComponentImpl forward;
 extern Drv::LinuxGpioDriverComponentImpl backward;
 
-extern Rover::ControlComponentImpl control;
-
 extern Drv::SocketIpDriverComponentImpl socketIpDriver;
+extern Drv::LinuxSerialDriverComponentImpl serial;
 extern Svc::GroundInterfaceComponentImpl groundIf;
+
+extern Rover::ControlComponentImpl control;
+extern Rover::GpsComponentImpl gps;
 
 #endif

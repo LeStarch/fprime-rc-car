@@ -2,85 +2,87 @@
 <?xml-model href="../../Autocoders/schema/ISF/topology_schema.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <assembly name = "Rover">
 
-    <!-- Immport component declarations -->
+     <!-- Immport component declarations -->
 
-   <import_component_type>Svc/FatalHandler/FatalHandlerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
-   <import_component_type>Svc/TlmChan/TlmChanComponentAi.xml</import_component_type>
-   <import_component_type>Svc/CmdDispatcher/CommandDispatcherComponentAi.xml</import_component_type>
-   <import_component_type>Svc/PrmDb/PrmDbComponentAi.xml</import_component_type>
-   <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
-   <import_component_type>Svc/CmdSequencer/CmdSequencerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
-   <import_component_type>Svc/FileUplink/FileUplinkComponentAi.xml</import_component_type>
-   <import_component_type>Svc/BufferManager/BufferManagerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/AssertFatalAdapter/AssertFatalAdapterComponentAi.xml</import_component_type>
-   <import_component_type>Svc/Health/HealthComponentAi.xml</import_component_type>
-   <import_component_type>Svc/GroundInterface/GroundInterfaceComponentAi.xml</import_component_type>
-   <import_component_type>Svc/BufferManager/BufferManagerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/ActiveLogger/ActiveLoggerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/LinuxTimer/LinuxTimerComponentAi.xml</import_component_type>
-   <import_component_type>Svc/Time/TimeComponentAi.xml</import_component_type>
-   <import_component_type>Svc/RateGroupDriver/RateGroupDriverComponentAi.xml</import_component_type>
-   <import_component_type>Svc/FileDownlink/FileDownlinkComponentAi.xml</import_component_type>
-   <import_component_type>Svc/PassiveConsoleTextLogger/PassiveTextLoggerComponentAi.xml</import_component_type>
-   <import_component_type>Drv/LinuxGpioDriver/LinuxGpioDriverComponentAi.xml</import_component_type>
-   <import_component_type>Drv/LinuxSerialDriver/LinuxSerialDriverComponentAi.xml</import_component_type>
-   <import_component_type>Drv/LinuxSpiDriver/LinuxSpiDriverComponentAi.xml</import_component_type>
+    <import_component_type>Svc/FatalHandler/FatalHandlerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
+    <import_component_type>Svc/TlmChan/TlmChanComponentAi.xml</import_component_type>
+    <import_component_type>Svc/CmdDispatcher/CommandDispatcherComponentAi.xml</import_component_type>
+    <import_component_type>Svc/PrmDb/PrmDbComponentAi.xml</import_component_type>
+    <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
+    <import_component_type>Svc/CmdSequencer/CmdSequencerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml</import_component_type>
+    <import_component_type>Svc/FileUplink/FileUplinkComponentAi.xml</import_component_type>
+    <import_component_type>Svc/BufferManager/BufferManagerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/AssertFatalAdapter/AssertFatalAdapterComponentAi.xml</import_component_type>
+    <import_component_type>Svc/Health/HealthComponentAi.xml</import_component_type>
+    <import_component_type>Svc/GroundInterface/GroundInterfaceComponentAi.xml</import_component_type>
+    <import_component_type>Svc/BufferManager/BufferManagerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/ActiveLogger/ActiveLoggerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/LinuxTimer/LinuxTimerComponentAi.xml</import_component_type>
+    <import_component_type>Svc/Time/TimeComponentAi.xml</import_component_type>
+    <import_component_type>Svc/RateGroupDriver/RateGroupDriverComponentAi.xml</import_component_type>
+    <import_component_type>Svc/FileDownlink/FileDownlinkComponentAi.xml</import_component_type>
+    <import_component_type>Svc/PassiveConsoleTextLogger/PassiveTextLoggerComponentAi.xml</import_component_type>
+    <import_component_type>Drv/LinuxGpioDriver/LinuxGpioDriverComponentAi.xml</import_component_type>
+    <import_component_type>Drv/LinuxSerialDriver/LinuxSerialDriverComponentAi.xml</import_component_type>
+    <import_component_type>Drv/LinuxSpiDriver/LinuxSpiDriverComponentAi.xml</import_component_type>
 
-   <import_component_type>Rover/Control/ControlComponentAi.xml</import_component_type>
-   <import_component_type>Drv/SocketIpDriver/SocketIpDriverComponentAi.xml</import_component_type>
+    <import_component_type>Drv/SocketIpDriver/SocketIpDriverComponentAi.xml</import_component_type>
+    <import_component_type>Drv/LinuxSerialDriver/LinuxSerialDriverComponentAi.xml</import_component_type>
+    <import_component_type>Rover/Control/ControlComponentAi.xml</import_component_type>
+    <import_component_type>Rover/Gps/GpsComponentAi.xml</import_component_type>
 
-   <!-- Declare component instances - must match names in Components.hpp -->
+    <!-- Declare component instances - must match names in Components.hpp -->
 
-   <instance namespace="Svc" name="fatalHandler" type="FatalHandler" base_id="100"  base_id_window="20" />
+    <instance namespace="Svc" name="fatalHandler" type="FatalHandler" base_id="100"  base_id_window="20" />
    
-   <instance namespace="Svc" name="rateGroup10HzComp" type="ActiveRateGroup" base_id="200"  base_id_window="20" />
+    <instance namespace="Svc" name="rateGroup10HzComp" type="ActiveRateGroup" base_id="200"  base_id_window="20" />
    
-   <instance namespace="Svc" name="rateGroup1HzComp" type="ActiveRateGroup" base_id="300"  base_id_window="20" />
+    <instance namespace="Svc" name="rateGroup1HzComp" type="ActiveRateGroup" base_id="300"  base_id_window="20" />
 
-   <instance namespace="Svc" name="chanTlm" type="TlmChan" base_id="400"  base_id_window="20" />
+    <instance namespace="Svc" name="chanTlm" type="TlmChan" base_id="400"  base_id_window="20" />
+    
+    <instance namespace="Svc" name="cmdDisp" type="CommandDispatcher" base_id="500"  base_id_window="20" />
    
-   <instance namespace="Svc" name="cmdDisp" type="CommandDispatcher" base_id="500"  base_id_window="20" />
+    <instance namespace="Svc" name="prmDb" type="PrmDb" base_id="600"  base_id_window="20" />
    
-   <instance namespace="Svc" name="prmDb" type="PrmDb" base_id="600"  base_id_window="20" />
+    <instance namespace="Svc" name="cmdSeq" type="CmdSequencer" base_id="700"  base_id_window="23" />
    
-   <instance namespace="Svc" name="cmdSeq" type="CmdSequencer" base_id="700"  base_id_window="23" />
+    <instance namespace="Svc" name="fileUplink" type="FileUplink" base_id="800"  base_id_window="20" />
    
-   <instance namespace="Svc" name="fileUplink" type="FileUplink" base_id="800"  base_id_window="20" />
+    <instance namespace="Svc" name="fileUplinkBufferManager" type="BufferManager" base_id="900"  base_id_window="20" />
    
-   <instance namespace="Svc" name="fileUplinkBufferManager" type="BufferManager" base_id="900"  base_id_window="20" />
+    <instance namespace="Svc" name="fatalAdapter" type="AssertFatalAdapter" base_id="1000"  base_id_window="20" />
    
-   <instance namespace="Svc" name="fatalAdapter" type="AssertFatalAdapter" base_id="1000"  base_id_window="20" />
+    <instance namespace="Svc" name="health" type="Health" base_id="1100"  base_id_window="20" />
    
-   <instance namespace="Svc" name="health" type="Health" base_id="1100"  base_id_window="20" />
+    <instance namespace="Svc" name="groundIf" type="GroundInterface" base_id="1200"  base_id_window="20" />
    
-   <instance namespace="Svc" name="groundIf" type="GroundInterface" base_id="1200"  base_id_window="20" />
+    <instance namespace="Svc" name="eventLogger" type="ActiveLogger" base_id="1400"  base_id_window="20" />
    
-   <instance namespace="Svc" name="fileDownlinkBufferManager" type="BufferManager" base_id="1300"  base_id_window="20" />
+    <instance namespace="Svc" name="linuxTime" type="Time" base_id="1500"  base_id_window="20" />
    
-   <instance namespace="Svc" name="eventLogger" type="ActiveLogger" base_id="1400"  base_id_window="20" />
-   
-   <instance namespace="Svc" name="linuxTime" type="Time" base_id="1500"  base_id_window="20" />
-   
-   <instance namespace="Svc" name="linuxTimer" type="LinuxTimer" base_id="1600"  base_id_window="20" />
+    <instance namespace="Svc" name="linuxTimer" type="LinuxTimer" base_id="1600"  base_id_window="20" />
 
-   <instance namespace="Svc" name="rateGroupDriverComp" type="RateGroupDriver" base_id="1700"  base_id_window="20" />
+    <instance namespace="Svc" name="rateGroupDriverComp" type="RateGroupDriver" base_id="1700"  base_id_window="20" />
    
-   <instance namespace="Svc" name="fileDownlink" type="FileDownlink" base_id="1800"  base_id_window="20" />
+    <instance namespace="Svc" name="fileDownlink" type="FileDownlink" base_id="1800"  base_id_window="20" />
    
-   <instance namespace="Svc" name="textLogger" type="PassiveTextLogger" base_id="1900"  base_id_window="20" />
+    <instance namespace="Svc" name="textLogger" type="PassiveTextLogger" base_id="1900"  base_id_window="20" />
    
-   <instance namespace="Drv" name="headlight" type="LinuxGpioDriver" base_id="2100"  base_id_window="100" />
-   <instance namespace="Drv" name="left" type="LinuxGpioDriver" base_id="2200"  base_id_window="100" />
-   <instance namespace="Drv" name="right" type="LinuxGpioDriver" base_id="2300"  base_id_window="100" />
-   <instance namespace="Drv" name="forward" type="LinuxGpioDriver" base_id="2400"  base_id_window="100" />
-   <instance namespace="Drv" name="backward" type="LinuxGpioDriver" base_id="2500"  base_id_window="100" />
+    <instance namespace="Drv" name="headlight" type="LinuxGpioDriver" base_id="2100"  base_id_window="100" />
+    <instance namespace="Drv" name="left" type="LinuxGpioDriver" base_id="2200"  base_id_window="100" />
+    <instance namespace="Drv" name="right" type="LinuxGpioDriver" base_id="2300"  base_id_window="100" />
+    <instance namespace="Drv" name="forward" type="LinuxGpioDriver" base_id="2400"  base_id_window="100" />
+    <instance namespace="Drv" name="backward" type="LinuxGpioDriver" base_id="2500"  base_id_window="100" />
 
-   <instance namespace="Rover" name="control" type="Control" base_id="2700"  base_id_window="100" />
+    <instance namespace="Rover" name="control" type="Control" base_id="2700"  base_id_window="100" />
+    <instance namespace="Rover" name="gps" type="Gps" base_id="2900"  base_id_window="100" />
 
     <!-- Communications driver. May be swapped with other comm drivers like UART -->
     <instance namespace="Drv" name="socketIpDriver" type="SocketIpDriver" base_id="2800" base_id_window="20" />
+    <instance namespace="Drv" name="serial" type="LinuxSerialDriver" base_id="3000"  base_id_window="20" />
 
     <!-- Communications driver connections -->
     <connection name = "CommunicationRecv">
@@ -124,6 +126,10 @@
         <source component = "control" port = "CmdReg" type = "CmdReg" num = "0"/>
         <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "6"/>
    </connection>
+   <connection name = "RpiGpsReg">
+        <source component = "gps" port = "cmdRegOut" type = "CmdReg" num = "0"/>
+        <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "7"/>
+   </connection>
 
     <!-- Command Dispatch Ports - Dispatch port number must match registration port for each component -->
 
@@ -155,6 +161,10 @@
         <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "6"/>
         <target component = "control" port = "CmdDisp" type = "Cmd" num = "0"/>
    </connection>
+   <connection name = "RpiGpsDisp">
+        <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "7"/>
+        <target component = "gps" port = "cmdIn" type = "Cmd" num = "0"/>
+   </connection>
    
     <!-- Command Reply Ports - Go to the same response port on the dispatcher -->
 
@@ -184,6 +194,10 @@
    </connection>
    <connection name = "RpiDemoReply">
        <source component = "control" port = "CmdStatus" type = "CmdResponse" num = "0"/>
+        <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+   </connection>
+   <connection name = "RpiGpsReply">
+       <source component = "gps" port = "cmdResponseOut" type = "CmdResponse" num = "0"/>
         <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
    </connection>
 
@@ -223,10 +237,6 @@
    </connection>
    <connection name = "CmdDispLog">
        <source component = "cmdDisp" port = "Log" type = "Log" num = "0"/>
-        <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
-   </connection>
-   <connection name = "FileDownlinkBufferManagerLog">
-       <source component = "fileDownlinkBufferManager" port = "eventOut" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
    </connection>
    <connection name = "CmdSeqLog">
@@ -275,6 +285,14 @@
    </connection>
    <connection name = "gpio8Log">
        <source component = "right" port = "Log" type = "Log" num = "0"/>
+        <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+   </connection>
+   <connection name = "GpsLog">
+       <source component = "gps" port = "eventOut" type = "Log" num = "0"/>
+        <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+   </connection>
+   <connection name = "UartLog">
+       <source component = "serial" port = "Log" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
    </connection>
    
@@ -340,6 +358,14 @@
        <source component = "right" port = "LogText" type = "LogText" num = "0"/>
         <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
    </connection>
+   <connection name = "GpsLog">
+       <source component = "gps" port = "LogText" type = "LogText" num = "0"/>
+        <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+   </connection>
+   <connection name = "UartLog">
+       <source component = "serial" port = "LogText" type = "LogText" num = "0"/>
+        <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+   </connection>
 
    <!-- Telemetry Connections -->
 
@@ -353,10 +379,6 @@
    </connection>
    <connection name = "FileUplinkTlm">
        <source component = "fileUplink" port = "tlmOut" type = "Tlm" num = "0"/>
-        <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
-   </connection>
-   <connection name = "FileDownlinkBufferManagerTlm">
-       <source component = "fileDownlinkBufferManager" port = "tlmOut" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
    </connection>
    <connection name = "cmdSeqTlm">
@@ -379,6 +401,14 @@
        <source component = "control" port = "Tlm" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
    </connection>
+   <connection name = "GpsTlm">
+       <source component = "gps" port = "tlmOut" type = "Tlm" num = "0"/>
+        <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+   </connection>
+   <connection name = "UartTlm">
+       <source component = "serial" port = "Tlm" type = "Tlm" num = "0"/>
+        <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+   </connection>
 
    <!-- Time Connections -->
 
@@ -392,10 +422,6 @@
    </connection>
    <connection name = "rateGroup10HzCompTime">
        <source component = "rateGroup10HzComp" port = "Time" type = "Time" num = "0"/>
-        <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
-   </connection>
-   <connection name = "fileDownlinkBufferManagerTime">
-       <source component = "fileDownlinkBufferManager" port = "timeCaller" type = "Time" num = "0"/>
         <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
    </connection>
    <connection name = "cmdSeqTime">
@@ -454,6 +480,14 @@
        <source component = "right" port = "Time" type = "Time" num = "0"/>
         <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
    </connection>
+   <connection name = "GpsTime">
+       <source component = "gps" port = "Time" type = "Time" num = "0"/>
+        <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
+   </connection>
+   <connection name = "UartDrvTime">
+       <source component = "serial" port = "Time" type = "Time" num = "0"/>
+        <target component = "linuxTime" port = "timeGetPort" type = "Time" num = "0"/>
+   </connection>
 
    <!-- Rate Group Connections -->
    
@@ -471,6 +505,14 @@
    <connection name = "control10Hz">
        <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "0"/>
         <target component = "control" port = "Run" type = "Sched" num = "0"/>
+   </connection>
+   <connection name = "fileDownlink10Hz">
+       <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "1"/>
+        <target component = "fileDownlink" port = "Run" type = "Sched" num = "0"/>
+   </connection>
+   <connection name = "gps10Hz">
+       <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "2"/>
+        <target component = "gps" port = "schedIn" type = "Sched" num = "0"/>
    </connection>
 
    <!-- 1Hz Rate Group -->
@@ -615,14 +657,6 @@
         <target component = "groundIf" port = "downlinkPort" type = "Com" num = "0"/>
    </connection>
    
-   <connection name = "fileDownlinkBufferGet">
-       <source component = "fileDownlink" port = "bufferGetCaller" type = "BufferGet" num = "0"/>
-        <target component = "fileDownlinkBufferManager" port = "bufferGetCallee" type = "BufferGet" num = "0"/>
-   </connection>
-   <connection name = "fileDownlinkBufferManagerBufferReturn">
-       <source component = "groundIf" port = "fileDownlinkBufferSendOut" type = "BufferSend" num = "0"/>
-        <target component = "fileDownlinkBufferManager" port = "bufferSendIn" type = "BufferSend" num = "0"/>
-   </connection>
    <connection name = "fileDownlinkBufferSend">
        <source component = "fileDownlink" port = "bufferSendOut" type = "BufferSend" num = "0"/>
         <target component = "groundIf" port = "fileDownlinkBufferSendIn" type = "BufferSend" num = "0"/>
@@ -658,4 +692,14 @@
         <target component = "right" port = "gpioWrite" type = "GpioRead" num = "0"/>
    </connection>
    
+   <!-- UART connection -->
+   
+   <connection name = "uartIn">
+       <source component = "serial" port = "serialRecv" type = "SerialRead" num = "0"/>
+       <target component = "gps" port = "readCallback" type = "SerialRead" num = "0"/>
+   </connection>
+   <connection name = "uartBuff">
+       <source component = "gps" port = "bufferReturn" type = "BufferSend" num = "0"/>
+       <target component = "serial" port = "readBufferSend" type = "BufferSend" num = "0"/>
+   </connection> 
 </assembly>
