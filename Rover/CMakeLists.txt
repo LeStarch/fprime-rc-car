@@ -28,8 +28,13 @@ include("${FPRIME_FRAMEWORK_PATH}/cmake/FPrime-Code.cmake")
 # core components in the topology, which is also added here.
 ##
 # Add component subdirectories
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Common/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Drivers/MotorPorts/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Drivers/DcMotor/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Drivers/StepperMotor/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Drivers/Gps/")
+
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Control/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Gps/")
 
 # Add Topology subdirectory
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Top/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/System/")

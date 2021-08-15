@@ -11,9 +11,9 @@
     <import_port_type>Fw/Cmd/CmdResponsePortAi.xml</import_port_type>
     <import_port_type>Fw/Buffer/BufferSendPortAi.xml</import_port_type>
     <import_port_type>Drv/SerialDriverPorts/SerialReadPortAi.xml</import_port_type>
-    <import_dictionary>Rover/Gps/Commands.xml</import_dictionary>
-    <import_dictionary>Rover/Gps/Telemetry.xml</import_dictionary>
-    <import_dictionary>Rover/Gps/Events.xml</import_dictionary>
+    <import_dictionary>Rover/Drivers/Gps/Commands.xml</import_dictionary>
+    <import_dictionary>Rover/Drivers/Gps/Telemetry.xml</import_dictionary>
+    <import_dictionary>Rover/Drivers/Gps/Events.xml</import_dictionary>
     <ports>
     
 

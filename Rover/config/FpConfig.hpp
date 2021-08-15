@@ -91,6 +91,14 @@
 #define FW_OBJECT_NAMES                     1   //!< Indicates whether or not object names are stored (more memory, can be used for tracking objects)
 #endif
 
+// To reduce binary size, FW_OPTIONAL_NAME(<string>) can be used to substitute strings with an empty string
+// when running with FW_OBJECT_NAMES disabled
+#if FW_OBJECT_NAMES == 1
+ #define FW_OPTIONAL_NAME(name) name
+#else
+ #define FW_OPTIONAL_NAME(name) ""
+#endif
+
 // Add methods to query an object about its name. Can be overridden by derived classes
 // For FW_OBJECT_TO_STRING to work, FW_OBJECT_NAMES must be enabled
 #if FW_OBJECT_NAMES == 1
@@ -150,7 +158,7 @@
 // Turn asserts on or off
 
 #define FW_NO_ASSERT                        1   //!< Asserts turned off
-#define FW_FILEID_ASSERT                    2   //!< File ID used - requires -DASSERT_FILE_ID=<somevalue> to be set on the compile command line
+#define FW_FILEID_ASSERT                    2   //!< File ID used - requires -DASSERT_FILE_ID=somevalue to be set on the compile command line
 #define FW_FILENAME_ASSERT                  3   //!< Uses the file name in the assert - image stores filenames
 
 #ifndef FW_ASSERT_LEVEL
@@ -185,7 +193,7 @@
  #endif
 // When dumping the contents of the registry, this specifies the size of the buffer used to store object names. Should be >= FW_OBJ_NAME_MAX_SIZE.
  #ifndef FW_OBJ_SIMPLE_REG_BUFF_SIZE
- #define FW_OBJ_SIMPLE_REG_BUFF_SIZE         255  //!< Size of ojbect registry dump string
+ #define FW_OBJ_SIMPLE_REG_BUFF_SIZE         255  //!< Size of object registry dump string
  #endif
 #endif
 
@@ -338,6 +346,12 @@ enum TimeBase {
 
 #ifndef FW_USE_TIME_CONTEXT
 #define FW_USE_TIME_CONTEXT             1 //!< Whether or not to serialize the time context
+#endif
+//
+//These defines used for the FilepathCharString type
+
+#ifndef FW_FIXED_LENGTH_STRING_SIZE
+#define FW_FIXED_LENGTH_STRING_SIZE   256 //!< Character array size for the filepath character type
 #endif
 
 // *** NOTE configuration checks are in Fw/Cfg/ConfigCheck.cpp in order to have

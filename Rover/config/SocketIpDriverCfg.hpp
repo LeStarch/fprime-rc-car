@@ -18,7 +18,7 @@
 enum SocketIpCfg {
     SOCKET_TIMEOUT_SECONDS = 1,       // Seconds component of timeout
     SOCKET_TIMEOUT_MICROSECONDS = 0,  // Milliseconds component of timeout
-    SOCKET_SEND_UDP = 0,              // 0 - Send down using TCP, 1 - Send down using UDP
+    SOCKET_SEND_UDP = 1,              // 0 - Send down using TCP, 1 - Send down using UDP
     SOCKET_SEND_FLAGS = 0,            // send, sendto FLAGS argument
     SOCKET_RECV_FLAGS = 0,            // recv FLAGS argument
     RECONNECT_AUTOMATICALLY = 1,      // Attempt to reconnect when a socket closes

@@ -1,0 +1,10 @@
+<dashboard-row>
+    <dashboard-box title="Last Image" border-color="black">
+        <image-display></image-display>
+    </dashboard-box>
+    <dashboard-box title="Location Tracker" border-color="black">
+        <div style="height: 40em;">
+            <gps-example></gps-example>
+        </div>
+    </dashboard-box>
+</dashboard-row>

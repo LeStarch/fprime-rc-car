@@ -62,7 +62,7 @@ Svc::PrmDbImpl prmDb("PRM","PrmDb.dat");
 
 Svc::FileUplink fileUplink("fileUplink");
 
-Svc::FileDownlink fileDownlink ("fileDownlink", 1000, 1000);
+Svc::FileDownlink fileDownlink ("fileDownlink", 5000, 1000);
 
 Svc::BufferManager fileUplinkBufferManager("fileUplinkBufferManager", UPLINK_BUFFER_STORE_SIZE, UPLINK_BUFFER_QUEUE_SIZE);
 

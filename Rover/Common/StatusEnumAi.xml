@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enum namespace="Rover" name="Status" >
+    <comment>Status enumeration</comment>
+    <item name="FAILED" value="0" comment="Failure response" />
+    <item name="SUCCESS" value="1" comment="Success response" />
+</enum>
+

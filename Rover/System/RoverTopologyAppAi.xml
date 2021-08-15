@@ -31,7 +31,7 @@
     <import_component_type>Drv/SocketIpDriver/SocketIpDriverComponentAi.xml</import_component_type>
     <import_component_type>Drv/LinuxSerialDriver/LinuxSerialDriverComponentAi.xml</import_component_type>
     <import_component_type>Rover/Control/ControlComponentAi.xml</import_component_type>
-    <import_component_type>Rover/Gps/GpsComponentAi.xml</import_component_type>
+    <import_component_type>Rover/Drivers/Gps/GpsComponentAi.xml</import_component_type>
 
     <!-- Declare component instances - must match names in Components.hpp -->
 
@@ -506,12 +506,8 @@
        <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "0"/>
         <target component = "control" port = "Run" type = "Sched" num = "0"/>
    </connection>
-   <connection name = "fileDownlink10Hz">
-       <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "1"/>
-        <target component = "fileDownlink" port = "Run" type = "Sched" num = "0"/>
-   </connection>
    <connection name = "gps10Hz">
-       <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "2"/>
+       <source component = "rateGroup10HzComp" port = "RateGroupMemberOut" type = "Sched" num = "1"/>
         <target component = "gps" port = "schedIn" type = "Sched" num = "0"/>
    </connection>
 
@@ -535,6 +531,10 @@
    <connection name = "cmdSeq">
        <source component = "rateGroup1HzComp" port = "RateGroupMemberOut" type = "Sched" num = "3"/>
         <target component = "cmdSeq" port = "schedIn" type = "Sched" num = "0"/>
+   </connection>
+   <connection name = "fileDownlink10Hz">
+       <source component = "rateGroup1HzComp" port = "RateGroupMemberOut" type = "Sched" num = "4"/>
+        <target component = "fileDownlink" port = "Run" type = "Sched" num = "0"/>
    </connection>
    
    <!-- Health Connections -->
@@ -662,6 +662,11 @@
         <target component = "groundIf" port = "fileDownlinkBufferSendIn" type = "BufferSend" num = "0"/>
    </connection>
    
+    <connection name = "fileDownlinkBufferReturn">
+        <source component = "groundIf" port = "fileDownlinkBufferSendOut" type = "BufferSend" num = "0"/>
+        <target component = "fileDownlink" port = "bufferReturn" type = "BufferSend" num = "0"/>
+   </connection>
+
    <!-- Fault Connectionss -->
    <connection name = "eventLoggerFatalOut">
        <source component = "eventLogger" port = "FatalAnnounce" type = "FatalEvent" num = "0"/>
