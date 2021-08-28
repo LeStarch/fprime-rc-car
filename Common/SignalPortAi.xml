@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface namespace="GwcRobot" name="Signal">
+    <import_enum_type>Common/StatusEnumAi.xml</import_enum_type>
+    <comment>Port used to stop for a fixed amount</comment>
+    <return type="Status" pass_by="value"> </return>
+</interface>

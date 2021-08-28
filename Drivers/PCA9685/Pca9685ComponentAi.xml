@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component namespace="GwcRobot" name="Pca9685" kind="passive">
+    <import_port_type>Drivers/PCA9685/Ports/PwmPortAi.xml</import_port_type>
+    <import_port_type>Drv/I2cDriverPorts/I2cPortAi.xml</import_port_type>
+    <ports>
+        <!-- Input ports -->
+        <port name="pwm" data_type="GwcRobot::Pwm" kind="sync_input" max_number="16" />
+        <!-- Output ports -->
+        <port name="i2cWrite" data_type="Drv::I2c"  kind="output" />
+    </ports>
+</component>

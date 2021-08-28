@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface namespace="GwcRobot" name="Spin">
+    <import_enum_type>Common/StatusEnumAi.xml</import_enum_type>
+    <import_enum_type>Drivers/MotorPorts/DirectionEnumAi.xml</import_enum_type>
+    <comment>Port used to spin for a fixed amount</comment>
+    <args>
+        <arg name="direction" type="Direction">
+            <comment>Direction of the spin</comment>
+        </arg>
+        <arg name="speed" type="U8">
+            <comment>Speed of the spin</comment>
+        </arg>
+        <arg name="revolutions" type="F32">
+            <comment>Count of the revolutions to spin</comment>
+        </arg>
+    </args>
+    <!--return type="Status" pass_by="value"> </return-->
+</interface>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enum namespace="GwcRobot" name="Direction">
+    <comment>Direction of the spin</comment>
+    <item name="FORWARD" value="0" comment="Spin the motor forwards" />
+    <item name="BACKWARD" value="1" comment="Spin the motor backwards" />
+</enum>
+

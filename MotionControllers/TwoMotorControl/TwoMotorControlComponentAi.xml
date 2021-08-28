@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component namespace="GwcRobot" name="TwoMotorControl" kind="active">
+    <import_port_type>Drivers/MotorPorts/SpinPortAi.xml</import_port_type>
+
+    <import_port_type>Fw/Cmd/CmdPortAi.xml</import_port_type>
+    <import_port_type>Fw/Cmd/CmdRegPortAi.xml</import_port_type>
+    <import_port_type>Fw/Cmd/CmdResponsePortAi.xml</import_port_type>
+
+    <import_port_type>Svc/Sched/SchedPortAi.xml</import_port_type>
+
+    <comment>A rover control component</comment>
+    <ports>
+        <port name="motor" data_type="Rover::Spin" kind="output"  max_number="2" />
+
+        <!-- Standard commanding ports -->
+        <port name="cmdRegOut" data_type="Fw::CmdReg" kind="output" role="CmdRegistration" max_number="1" />
+        <port name="cmdIn" data_type="Fw::Cmd" kind="input" role="Cmd" max_number="1" />
+        <port name="cmdResponseOut" data_type="Fw::CmdResponse" kind="output" role="CmdResponse" max_number="1" />
+    </ports>
+    <commands>
+        <command kind="async" opcode="0" mnemonic="GO" />
+    </commands>
+</component>
+

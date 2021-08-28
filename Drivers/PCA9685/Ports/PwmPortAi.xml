@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface namespace="GwcRobot" name="Pwm">
+    <comment>Port used to set PWM output</comment>
+    <args>
+        <arg name="duty_cycle" type="U16">
+            <comment>Duty cycle of the PWM output</comment>
+        </arg>
+    </args>
+</interface>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enum namespace="GwcRobot" name="Power">
+    <comment>Power on/off</comment>
+    <item name="ON" value="1" comment="Power on" />
+    <item name="OFF" value="0" comment="Power off" />
+</enum>
+
