@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component namespace="GwcRobot"  name="Gps" kind="passive" modeler="true">
+
+    <import_port_type>Fw/Cmd/CmdRegPortAi.xml</import_port_type>
+    <import_port_type>Fw/Log/LogPortAi.xml</import_port_type>
+    <import_port_type>Fw/Cmd/CmdPortAi.xml</import_port_type>
+    <import_port_type>Svc/Sched/SchedPortAi.xml</import_port_type>
+    <import_port_type>Fw/Tlm/TlmPortAi.xml</import_port_type>
+    <import_port_type>Fw/Cmd/CmdResponsePortAi.xml</import_port_type>
+    <import_port_type>Fw/Buffer/BufferSendPortAi.xml</import_port_type>
+    <import_port_type>Drv/SerialDriverPorts/SerialReadPortAi.xml</import_port_type>
+    <import_dictionary>Drivers/Gps/Commands.xml</import_dictionary>
+    <import_dictionary>Drivers/Gps/Telemetry.xml</import_dictionary>
+    <import_dictionary>Drivers/Gps/Events.xml</import_dictionary>
+    <ports>
+    
+
+        <port name="cmdRegOut" data_type="Fw::CmdReg"  kind="output" role="CmdRegistration"    max_number="1">
+        </port>
+
+        <port name="eventOut" data_type="Fw::Log"  kind="output" role="LogEvent"    max_number="1">
+        </port>
+
+        <port name="cmdIn" data_type="Fw::Cmd"  kind="input" role="Cmd"    max_number="1">
+        </port>
+
+        <port name="schedIn" data_type="Svc::Sched"  kind="sync_input"    max_number="1">
+        </port>
+
+        <port name="tlmOut" data_type="Fw::Tlm"  kind="output" role="Telemetry"    max_number="1">
+        </port>
+
+        <port name="cmdResponseOut" data_type="Fw::CmdResponse"  kind="output" role="CmdResponse"    max_number="1">
+        </port>
+
+        <port name="bufferReturn" data_type="Fw::BufferSend"  kind="output"    max_number="1">
+        </port>
+
+        <port name="readCallback" data_type="Drv::SerialRead"  kind="sync_input"    max_number="1">
+        </port>
+
+    </ports>
+
+</component>
