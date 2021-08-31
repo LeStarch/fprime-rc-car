@@ -16,6 +16,11 @@ class Pca9685ComponentImpl : public Pca9685ComponentBase {
     // ----------------------------------------------------------------------
     // Construction, initialization, and destruction
     // ----------------------------------------------------------------------
+    static const U8 PRESCALE = 3; //25000000 (clock frequence) / 4096 (counter size) / 1600 (PWM frequency) - 1
+
+    static const U8 MODE_REG = 0x00;
+    static const U8 PRESCALE_REG = 0xFE;
+    static const U8 PWM_REG_BASE = 0x06;
 
     //! Construct object PCA9685
     //!
@@ -27,7 +32,7 @@ class Pca9685ComponentImpl : public Pca9685ComponentBase {
     void init(const NATIVE_INT_TYPE instance = 0 /*!< The instance number*/
     );
 
-    void configure(U8 address);
+    void startup(U8 address);
 
     //! Destroy object PCA9685
     //!

@@ -17,6 +17,7 @@ enum Motors {
     RIGHT_MOTOR = 1,
 };
 
+
 /**
  * Second assignment:
  *
@@ -30,7 +31,7 @@ enum Motors {
 void TwoMotorControlComponentImpl:: motion_helper() {
     Direction direction = Direction::FORWARD;
     U8 speed = 100; // Speed is defined as 0% to 100% with fine-control in 1% steps
-    U32 revolutions = 1; // Number of revolutions of the motor before the command is done
+    F32 revolutions = 1.0f; // Number of revolutions of the motor before the command is done
 
     // Drives the motors
     motor_out(LEFT_MOTOR, direction, speed, revolutions);

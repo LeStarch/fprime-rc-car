@@ -12,6 +12,7 @@
 
     <import_port_type>Svc/Sched/SchedPortAi.xml</import_port_type>
 
+    <import_enum_type>Drivers/MotorPorts/DirectionEnumAi.xml</import_enum_type>
     <import_port_type>Drivers/MotorPorts/SpinPortAi.xml</import_port_type>
     <import_port_type>Drivers/PCA9685/Ports/PwmPortAi.xml</import_port_type>
 
@@ -43,16 +44,24 @@
     <commands>
         <command kind="async" mnemonic="SPIN" opcode="0x0">
             <args>
-                <arg name="direction" type="Direction" />
+                <arg name="direction" type="GwcRobot::Direction" />
                 <arg name="speed" type="U8" />
                 <arg name="revolutions" type="F32" />
             </args>
         </command>
         <command kind="async" mnemonic="STEP" opcode="0x1">
             <args>
-                <arg name="direction" type="Direction" />
+                <arg name="direction" type="GwcRobot::Direction" />
                 <arg name="count" type="U32" />
             </args>
         </command>
     </commands>
+    <!--events>
+        <event id="0" name="SetPwm" severity="ACTIVITY_LO" format_string = "Stepper setting PWM port %d to %x" >
+            <args>
+                <arg name="port" type="U32" />
+                <arg name="value" type="U32" />
+            </args>
+        </event>
+    </events-->
 </component>

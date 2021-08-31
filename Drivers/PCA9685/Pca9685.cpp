@@ -20,10 +20,33 @@ void Pca9685ComponentImpl ::init(const NATIVE_INT_TYPE instance) {
     Pca9685ComponentBase::init(instance);
 }
 
-Pca9685ComponentImpl ::~Pca9685ComponentImpl(void) {}
+Pca9685ComponentImpl ::~Pca9685ComponentImpl() {}
 
- void Pca9685ComponentImpl ::configure(U8 address) {
+void Pca9685ComponentImpl ::startup(U8 address) {
     m_address = address;
+
+    U8 data[2];
+    Fw::Buffer buffer(data, sizeof(data));
+    buffer.getData()[0] = MODE_REG;
+    buffer.getData()[1] = 0x10; // Mode 1, set to sleep
+    i2cWrite_out(0, m_address, buffer);
+
+    // Set the mode register to sleep (in preparation to set the mode register)
+    buffer.getData()[0] = MODE_REG;
+    buffer.getData()[1] = 0x10; // Mode 1
+    i2cWrite_out(0, m_address, buffer);
+
+    // Set the prescale value
+    buffer.getData()[0] = PRESCALE_REG;
+    buffer.getData()[1] = PRESCALE;
+    i2cWrite_out(0, m_address, buffer);
+
+    // No sleep, reset, and enable autoincrement
+    buffer.getData()[0] = MODE_REG;
+    buffer.getData()[1] = 0xA0; // Mode 1
+    i2cWrite_out(0, m_address, buffer);
+
+    Os::Task::delay(1); // At least 500us
 }
 
 // ----------------------------------------------------------------------
@@ -32,7 +55,7 @@ Pca9685ComponentImpl ::~Pca9685ComponentImpl(void) {}
 
 void Pca9685ComponentImpl ::pwm_handler(const NATIVE_INT_TYPE portNum, U16 duty_cycle) {
     FW_ASSERT(duty_cycle < 0x1000);
-    U8 reg = (portNum * 4) + 6;
+    U8 reg = (portNum * 4) + PWM_REG_BASE;
     // Word 0
     U16 on = (duty_cycle != 0xFFF) ? 0 : 0x1000;
     // Word 1

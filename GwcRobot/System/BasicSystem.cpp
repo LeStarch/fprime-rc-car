@@ -9,6 +9,12 @@
 #include <Fw/Types/MallocAllocator.hpp>
 #include <Fw/Types/StringType.hpp>
 
+enum {
+    UPLINK_BUFFER_STORE_SIZE = 3000,
+    UPLINK_BUFFER_QUEUE_SIZE = 30,
+    UPLINK_BUFFER_MGR_ID = 200
+};
+
 // Choose the ground-to-spacecraft wire format. Here we use the fprime format as it will work well with the fprime
 // ground system needed to control the robot.
 Svc::FprimeDeframing deframing;
@@ -104,6 +110,12 @@ void register_basic_system() {
     fileDownlink.regCommands();
 
     health.regCommands();
+
+    Svc::BufferManagerComponentImpl::BufferBins upBuffMgrBins;
+    memset(&upBuffMgrBins,0,sizeof(upBuffMgrBins));
+    upBuffMgrBins.bins[0].bufferSize = UPLINK_BUFFER_STORE_SIZE;
+    upBuffMgrBins.bins[0].numBuffers = UPLINK_BUFFER_QUEUE_SIZE;
+    fileUplinkBufferManager.setup(UPLINK_BUFFER_MGR_ID,0,allocator,upBuffMgrBins);
 }
 
 void start_basic_system() {

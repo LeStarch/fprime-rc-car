@@ -77,7 +77,7 @@ void StepperMotorComponentImpl ::spin(const Direction& direction, U8 speed, F32 
 void StepperMotorComponentImpl ::step(const Direction& direction, U32 micros) {
     FW_ASSERT(micros < PSEUDO_STEPS, micros);
 
-    const U32 delta = (direction == Direction::FORWARD) ? (m_current + micros) : (m_current + PSEUDO_STEPS - micros);
+    const U32 delta = (direction == Direction::FORWARD) ? (micros) : (PSEUDO_STEPS - micros);
     m_current = (m_current + delta) % PSEUDO_STEPS;
 
     // Duty cycles are reset to zero
@@ -94,7 +94,7 @@ void StepperMotorComponentImpl ::step(const Direction& direction, U32 micros) {
     for (U32 i = 0; i < COILS; i++) {
         pwm_out(i, duty[i]);
     }
-    // TODO: wait here?
+    Os::Task::delay(10); // Delay between steps
 }
 
 // ----------------------------------------------------------------------

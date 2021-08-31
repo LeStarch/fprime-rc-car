@@ -31,6 +31,7 @@
 
     <import_component_type>Drivers/PCA9685/Pca9685ComponentAi.xml</import_component_type>
     <import_component_type>Drivers/StepperMotor/StepperMotorComponentAi.xml</import_component_type>
+    <import_component_type>MotionControllers/TwoMotorControl/TwoMotorControlComponentAi.xml</import_component_type>
 
     <!-- Declare component instances - must match names in Components.hpp -->
 
@@ -81,6 +82,8 @@
     <instance namespace="Drivers" name="pca9685" type="Pca9685" base_id="2100"  base_id_window="20" />
     <instance namespace="Drivers" name="stepper0" type="StepperMotor" base_id="2200"  base_id_window="20" />
     <instance namespace="Drivers" name="stepper1" type="StepperMotor" base_id="2300"  base_id_window="20" />
+
+    <instance namespace="GwcRobot" name="motion" type="TwoMotorControl" base_id="2400"  base_id_window="20" />
 
     <!-- Connections -->
     <!-- Communications driver connections -->
@@ -186,6 +189,10 @@
         <source component = "stepper1" port = "cmdRegOut" type = "CmdReg" num = "0"/>
         <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "7"/>
     </connection>
+    <connection name = "MotionCmdReg">
+        <source component = "motion" port = "cmdRegOut" type = "CmdReg" num = "0"/>
+        <target component = "cmdDisp" port = "compCmdReg" type = "CmdReg" num = "8"/>
+    </connection>
 
     <!-- Command Dispatch Ports - Dispatch port number must match registration port for each component -->
 
@@ -221,6 +228,10 @@
         <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "7"/>
         <target component = "stepper1" port = "cmdIn" type = "Cmd" num = "0"/>
     </connection>
+    <connection name = "motionCmdDisp">
+        <source component = "cmdDisp" port = "compCmdSend" type = "Cmd" num = "8"/>
+        <target component = "motion" port = "cmdIn" type = "Cmd" num = "0"/>
+    </connection>
 
     <!-- Command Reply Ports - Go to the same response port on the dispatcher -->
     <connection name = "EventLoggerReply">
@@ -253,6 +264,10 @@
     </connection>
     <connection name = "stepper1cmdReply">
         <source component = "stepper1" port = "cmdResponseOut" type = "CmdResponse" num = "0"/>
+        <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
+    </connection>
+    <connection name = "motionCmdReply">
+        <source component = "motion" port = "cmdResponseOut" type = "CmdResponse" num = "0"/>
         <target component = "cmdDisp" port = "compCmdStat" type = "CmdResponse" num = "0"/>
     </connection>
 
@@ -323,6 +338,10 @@
         <source component = "stepper1" port = "eventOut" type = "Log" num = "0"/>
         <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
     </connection>
+    <connection name = "motionLog">
+        <source component = "motion" port = "eventOut" type = "Log" num = "0"/>
+        <target component = "eventLogger" port = "LogRecv" type = "Log" num = "0"/>
+    </connection>
 
     <!-- Event Logger Text Connections -->
 
@@ -366,6 +385,10 @@
         <source component = "stepper1" port = "eventTextOut" type = "LogText" num = "0"/>
         <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
     </connection>
+    <connection name = "motionLogText">
+        <source component = "motion" port = "eventTextOut" type = "LogText" num = "0"/>
+        <target component = "textLogger" port = "TextLogger" type = "LogText" num = "0"/>
+    </connection>
 
     <!-- Telemetry Connections -->
 
@@ -403,6 +426,10 @@
     </connection>
     <connection name = "stepper1tlm">
         <source component = "stepper1" port = "tlmOut" type = "Tlm" num = "0"/>
+        <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
+    </connection>
+    <connection name = "motionTlm">
+        <source component = "motion" port = "tlmOut" type = "Tlm" num = "0"/>
         <target component = "chanTlm" port = "TlmRecv" type = "Tlm" num = "0"/>
     </connection>
 
@@ -579,18 +606,27 @@
     </connection>
 
     <!-- Driver connections -->
+    <connection name="motionToStepper0">
+        <source component = "motion" port = "motor" type = "GwcRobot::Spin" num = "0" />
+        <target component = "stepper0" port = "spin" type = "GwcRobot::Spin" num = "0" />
+    </connection>
+    <connection name="motionToStepper1">
+        <source component = "motion" port = "motor" type = "GwcRobot::Spin" num = "1" />
+        <target component = "stepper1" port = "spin" type = "GwcRobot::Spin" num = "0" />
+    </connection>
+
     <!-- Stepper0 - PWM connections. Note: ORDER MATTERS.  Order is borrowed from the Adafruit driver -->
     <connection name="stepper0ToPcaAin1">
         <source component = "stepper0" port = "pwm" type = "GwcRobot::Pwm" num = "0" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "10"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "9"/>
     </connection>
     <connection name="stepper0ToPcaAin2">
         <source component = "stepper0" port = "pwm" type = "GwcRobot::Pwm" num = "1" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "9"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "11"/>
     </connection>
     <connection name="stepper0ToPcaBin1">
         <source component = "stepper0" port = "pwm" type = "GwcRobot::Pwm" num = "2" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "11"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "10"/>
     </connection>
     <connection name="stepper0ToPcaBin2">
         <source component = "stepper0" port = "pwm" type = "GwcRobot::Pwm" num = "3" />
@@ -608,15 +644,15 @@
     <!-- Stepper1 - PWM connections. Note: ORDER MATTERS.  Order is borrowed from the Adafruit driver -->
     <connection name="stepper1ToPcaAin1">
         <source component = "stepper1" port = "pwm" type = "GwcRobot::Pwm" num = "0" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "4"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "3"/>
     </connection>
     <connection name="stepper1ToPcaAin2">
         <source component = "stepper1" port = "pwm" type = "GwcRobot::Pwm" num = "1" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "3"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "5"/>
     </connection>
     <connection name="stepper1ToPcaBin1">
         <source component = "stepper1" port = "pwm" type = "GwcRobot::Pwm" num = "2" />
-        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "5"/>
+        <target component = "pca9685" port = "pwm" type = "GwcRobot::Pwm" num = "4"/>
     </connection>
     <connection name="stepper1ToPcaBin2">
         <source component = "stepper1" port = "pwm" type = "GwcRobot::Pwm" num = "3" />

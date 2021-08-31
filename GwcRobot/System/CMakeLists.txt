@@ -7,7 +7,7 @@
 # Note: using PROJECT_NAME as EXECUTABLE_NAME
 ####
 set(SOURCE_FILES
-	"${CMAKE_CURRENT_LIST_DIR}/RoverTopologyAppAi.xml"
+	"${CMAKE_CURRENT_LIST_DIR}/GwcRobotTopologyAppAi.xml"
 	"${CMAKE_CURRENT_LIST_DIR}/BasicSystem.cpp"
 	"${CMAKE_CURRENT_LIST_DIR}/Project.cpp"
 	"${CMAKE_CURRENT_LIST_DIR}/Topology.cpp"
@@ -17,6 +17,6 @@ set(SOURCE_FILES
 set(MOD_DEPS
     Fw/Logger
     Svc/LinuxTime
-	Drv/TcpClient
+    Drv/TcpClient
 )
 register_fprime_executable()
