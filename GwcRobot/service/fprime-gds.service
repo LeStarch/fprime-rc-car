@@ -1,0 +1,17 @@
+[Unit]
+Description=A wrapper to start the fprime-gds
+After=network.target
+Requires=network.target
+
+[Service]
+User=www-data
+Group=www-data
+Type=simple
+PIDFile=/var/run/fprime-gds.pid
+ExecStart=fprime-gds --gui-addr 0.0.0.0 -n --dictionary /opt/fprime/service/dictionary.xml -l /tmp/fprime-logs/
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /var/run/fprime-gds.pid
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

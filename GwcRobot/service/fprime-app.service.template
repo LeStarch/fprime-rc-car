@@ -1,0 +1,17 @@
+[Unit]
+Description=Run the fprime code
+After=network.target
+Requires=network.target
+
+[Service]
+User=USER
+Group=USER
+Type=simple
+PIDFile=/var/run/fprime-app.pid
+ExecStart=/opt/fprime/service/binary -a 127.0.0.1 -p 50000
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /var/run/fprime-app.pid
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

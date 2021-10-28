@@ -1,0 +1,32 @@
+#!/bin/bash
+DIR="$(cd $(dirname $BASH_SOURCE) && pwd)" 
+if [ "$EUID" -ne 0 ]
+then
+    echo "$0 must be run as root"
+    exit 1
+fi
+USER=`logname`
+if [[ "$1" != "" ]]
+then
+    USER="$1"
+fi
+
+apt install python3 python3-pip
+pip3 install fprime-gds
+
+if ! id "$USER" &>/dev/null;
+then
+    useradd fprime -r -U -G dialout
+fi
+sed 's/USER/'$USER'/g' fprime-app.service.template > fprime-app.service
+
+cp "${DIR}/fprime-gds.service" /lib/systemd/system/
+ln -fs /lib/systemd/system/fprime-app.service /etc/systemd/system/multi-user.target.wants/
+cp "${DIR}/fprime-app.service" /lib/systemd/system/
+ln -fs /lib/systemd/system/fprime-app.service /etc/systemd/system/multi-user.target.wants/
+
+systemctl daemon-reload
+systemctl enable fprime-gds.service
+systemctl enable fprime-app.service
+systemctl start fprime-gds.service
+systemctl start fprime-app.service
