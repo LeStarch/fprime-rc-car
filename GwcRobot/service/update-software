@@ -1,0 +1,12 @@
+#!/bin/bash
+DIR="$(cd $(dirname $0)/..; pwd)"
+if [[ "$1" != robot[0-3] ]]
+then
+    echo "[ERROR] Please specify robot1, robot2, or robot3"
+    exit 22
+fi
+fprime-util build || exit 23
+ssh pi@$1 -x "sudo systemctl stop fprime-gds; sudo systemctl stop fprime-app;"
+scp "$DIR/build-artifacts/raspberrypi/bin/GwcRobot" pi@$1":/opt/fprime/service/binary"
+scp "$DIR/build-artifacts/raspberrypi/dict/GwcRobotTopologyAppDictionary.xml" pi@$1":/opt/fprime/service/dictionary.xml"
+ssh pi@$1 -x "sudo systemctl start fprime-gds; sudo systemctl start fprime-app;"
