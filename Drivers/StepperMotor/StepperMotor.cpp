@@ -36,6 +36,10 @@ void StepperMotorComponentImpl ::startup() {
     power_out(0, 0xFFF);
     power_out(1, 0xFFF);
 
+    deenergize();
+}
+
+void StepperMotorComponentImpl ::deenergize() {
     // Shutoff all stepper coils
     for (U32 i = 0; i < COILS; i++) {
         pwm_out(i, 0);
@@ -72,6 +76,7 @@ void StepperMotorComponentImpl ::spin(const Direction& direction, U8 speed, F32 
     for (U32 i = 0; i < steps; i++) {
         step(direction, micros);
     }
+    deenergize();
 }
 
 void StepperMotorComponentImpl ::step(const Direction& direction, U32 micros) {
@@ -118,6 +123,7 @@ void StepperMotorComponentImpl ::STEP_cmdHandler(const FwOpcodeType opCode,
     for (U32 i = 0; i < count; i++) {
         step(direction, MICRO_STEPS);
     }
+    deenergize();
     this->cmdResponse_out(opCode, cmdSeq, Fw::COMMAND_OK);
 }
 

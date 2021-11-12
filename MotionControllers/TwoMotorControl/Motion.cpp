@@ -13,8 +13,8 @@ namespace GwcRobot {
  * determining if the numbers are correct.
  */
 enum Motors {
-    LEFT_MOTOR = 0,
-    RIGHT_MOTOR = 1,
+    LEFT_MOTOR = 1,
+    RIGHT_MOTOR = 0,
 };
 
 

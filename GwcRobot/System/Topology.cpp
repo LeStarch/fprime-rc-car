@@ -1,5 +1,8 @@
 #include <Components.hpp>
 
+#include <Os/Log.hpp>
+Os::Log osLogger;
+
 void constructApp(char* hostname, U16 port_number) {
     // Initialize basic and project components
     init_basic_system();

@@ -50,6 +50,10 @@ class StepperMotorComponentImpl : public StepperMotorComponentBase {
     //!
     void startup();
 
+    //! Deenergize the stepper coils
+    //!
+    void deenergize();
+
   private:
 
     //! Spin helper class
