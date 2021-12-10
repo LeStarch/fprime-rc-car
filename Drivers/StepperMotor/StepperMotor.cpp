@@ -64,7 +64,7 @@ void StepperMotorComponentImpl ::spin(const Direction& direction, U8 speed, F32 
         return;
     }
     // Calculate micros steps per "step" given our speed
-    U32 micros = ((speed - 1) * MICRO_STEPS) / MAX_SPEED + 1;
+    U32 micros = ((speed/2 - 1) * MICRO_STEPS) / MAX_SPEED + 1;
     // Number of steps to get the revolutions we need
     U32 steps = static_cast<U32>(revoluions * STEPS_PER_ROTATION);
 
@@ -94,7 +94,7 @@ void StepperMotorComponentImpl ::step(const Direction& direction, U32 micros) {
     for (U32 i = 0; i < COILS; i++) {
         pwm_out(i, duty[i]);
     }
-    Os::Task::delay(10); // Delay between steps
+    Os::Task::delay(4); // Delay between steps
 }
 
 // ----------------------------------------------------------------------
