@@ -39,4 +39,36 @@ void TwoMotorControlComponentImpl:: motion_helper() {
     motor_out(RIGHT_MOTOR, direction, speed, revolutions);
 }
 
-};
+void TwoMotorControlComponentImpl ::FORWARD_cmdHandler(const FwOpcodeType opCode,
+                                                       const U32 cmdSeq,
+                                                       U8 speed,
+                                                       F32 revolutions) {
+    // TODO
+    this->cmdResponse_out(opCode, cmdSeq, Fw::COMMAND_OK);
+}
+
+void TwoMotorControlComponentImpl ::BACKWARD_cmdHandler(const FwOpcodeType opCode,
+                                                        const U32 cmdSeq,
+                                                        U8 speed,
+                                                        F32 revolutions) {
+    // TODO
+    this->cmdResponse_out(opCode, cmdSeq, Fw::COMMAND_OK);
+}
+
+void TwoMotorControlComponentImpl ::LEFT_cmdHandler(const FwOpcodeType opCode,
+                                                    const U32 cmdSeq,
+                                                    U8 speed,
+                                                    F32 degrees) {
+    // TODO
+    this->cmdResponse_out(opCode, cmdSeq, Fw::COMMAND_OK);
+}
+
+void TwoMotorControlComponentImpl ::RIGHT_cmdHandler(const FwOpcodeType opCode,
+                                                     const U32 cmdSeq,
+                                                     U8 speed,
+                                                     F32 degrees) {
+    // TODO
+    this->cmdResponse_out(opCode, cmdSeq, Fw::COMMAND_OK);
+}
+
+};  // namespace GwcRobot

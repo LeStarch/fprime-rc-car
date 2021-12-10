@@ -52,6 +52,34 @@ class TwoMotorControlComponentImpl : public TwoMotorControlComponentBase {
     void GO_cmdHandler(const FwOpcodeType opCode, /*!< The opcode*/
                        const U32 cmdSeq           /*!< The command sequence number*/
     );
+
+    //! Implementation for FORWARD command handler
+    //!
+    void FORWARD_cmdHandler(const FwOpcodeType opCode, /*!< The opcode*/
+                            const U32 cmdSeq,          /*!< The command sequence number*/
+                            U8 speed,
+                            F32 revolutions);
+
+    //! Implementation for BACKWARD command handler
+    //!
+    void BACKWARD_cmdHandler(const FwOpcodeType opCode, /*!< The opcode*/
+                             const U32 cmdSeq,          /*!< The command sequence number*/
+                             U8 speed,
+                             F32 revolutions);
+
+    //! Implementation for LEFT command handler
+    //!
+    void LEFT_cmdHandler(const FwOpcodeType opCode, /*!< The opcode*/
+                         const U32 cmdSeq,          /*!< The command sequence number*/
+                         U8 speed,
+                         F32 degrees);
+
+    //! Implementation for RIGHT command handler
+    //!
+    void RIGHT_cmdHandler(const FwOpcodeType opCode, /*!< The opcode*/
+                          const U32 cmdSeq,          /*!< The command sequence number*/
+                          U8 speed,
+                          F32 degrees);
 };
 
 }  // end namespace GwcRobot
