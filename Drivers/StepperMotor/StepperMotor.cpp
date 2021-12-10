@@ -94,7 +94,7 @@ void StepperMotorComponentImpl ::step(const Direction& direction, U32 micros) {
     for (U32 i = 0; i < COILS; i++) {
         pwm_out(i, duty[i]);
     }
-    Os::Task::delay(4); // Delay between steps
+    Os::Task::delay(10); // Delay between steps
 }
 
 // ----------------------------------------------------------------------
