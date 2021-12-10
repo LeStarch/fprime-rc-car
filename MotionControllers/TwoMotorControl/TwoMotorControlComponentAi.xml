@@ -32,6 +32,30 @@
     </ports>
     <commands>
         <command kind="async" opcode="0" mnemonic="GO" />
+	<command kind="async" opcode="1" mnemonic="FORWARD">
+            <args>
+                <arg name="speed" type="U8" />
+                <arg name="revolutions" type="F32" />
+            </args>
+        </command>
+        <command kind="async" opcode="2" mnemonic="BACKWARD">
+            <args>
+                <arg name="speed" type="U8" />
+                <arg name="revolutions" type="F32" />
+            </args>
+        </command>
+        <command kind="async" opcode="3" mnemonic="LEFT">
+            <args>
+                <arg name="speed" type="U8" />
+                <arg name="revolutions" type="F32" />
+            </args>
+        </command>
+        <command kind="async" opcode="4" mnemonic="RIGHT">
+            <args>
+                <arg name="speed" type="U8" />
+                <arg name="revolutions" type="F32" />
+            </args>
+        </command>
     </commands>
 </component>
 

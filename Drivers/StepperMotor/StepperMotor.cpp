@@ -64,7 +64,7 @@ void StepperMotorComponentImpl ::spin(const Direction& direction, U8 speed, F32 
         return;
     }
     // Calculate micros steps per "step" given our speed
-    U32 micros = ((speed/2 - 1) * MICRO_STEPS) / MAX_SPEED + 1;
+    U32 micros = ((speed - 1) * MICRO_STEPS) / MAX_SPEED + 1;
     // Number of steps to get the revolutions we need
     U32 steps = static_cast<U32>(revoluions * STEPS_PER_ROTATION);
 
